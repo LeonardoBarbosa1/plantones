@@ -77,7 +77,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['name', 'string'],
             //type
             ['type', 'required'],
-            ['type', 'integer'],
+//            ['type', 'in', 'range' => array_keys($this->typeValues())],
             //password
             ['password_hash', 'required'],
             ['password_hash', 'string'],
@@ -95,6 +95,19 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function typeValues()
+    {
+        $types = [
+            self::TYPE_ADMIN => 'Administrador',
+            self::TYPE_COMMON => 'Comum',
+        ];
+
+        return $types[$this->type];
     }
 
     /**
