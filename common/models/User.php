@@ -11,9 +11,12 @@ use yii\web\IdentityInterface;
  * User model
  *
  * @property integer $id
+ * @property string $email
+ * @property string $username
+ * @property string $name
+ * @property int $type
  * @property string $password_hash
  * @property string $password_reset_token
- * @property string $email
  * @property string $auth_key
  * @property integer $status
  * @property integer $created_at
@@ -25,8 +28,21 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
 
+    const TYPE_ADMIN = 1;
+    const TYPE_COMMON = 2;
+
     /**
-     * @inheritdoc
+     * @var $password_user string
+     */
+    public $password_user;
+
+    /**
+     * @var $confirm_password string
+     */
+    public $confirm_password;
+
+    /**
+     * @see \m130524_201442_create_user_table
      */
     public static function tableName()
     {
@@ -39,7 +55,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
         ];
     }
 
@@ -49,8 +65,54 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            //email
+            ['email', 'required'],
+            ['email', 'string'],
+            ['email', 'unique'],
+            ['email', 'email'],
+            //username
+            ['username', 'string'],
+            //name
+            ['name', 'required'],
+            ['name', 'string'],
+            //type
+            ['type', 'required'],
+            ['type', 'integer'],
+            //password
+            ['password_hash', 'required'],
+            ['password_hash', 'string'],
+            //password_reset_token
+            ['password_reset_token', 'string'],
+            //password_user
+            ['password_user', 'required'],
+            ['password_user', 'string', 'min' => 6],
+            //confirm_password
+            ['confirm_password', 'required'],
+            ['confirm_password', 'compare', 'compareAttribute' => 'password_user', 'message' => 'As senhas não correspondem.'],
+            //auth_key
+            ['auth_key', 'string'],
+            //status
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'email' => 'Email',
+            'username' => 'Usuário',
+            'name' => 'Nome',
+            'type' => 'Tipo',
+            'password' => 'Senha',
+            'password_user' => 'Senha',
+            'status' => 'Status',
+            'created_at' => 'Cadastrado em',
+            'updated_at' => 'Atualizado em',
         ];
     }
 
@@ -183,5 +245,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return UserQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new UserQuery(get_called_class());
     }
 }

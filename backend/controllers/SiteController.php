@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -19,10 +20,14 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'actions' => ['login', 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['register', 'error'],
                         'allow' => true,
                     ],
                     [
@@ -49,6 +54,7 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+//                'layout' => Yii::$app->user->isGuest ? 'main-login' : 'main',
             ],
         ];
     }
@@ -61,8 +67,9 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $this->layout = 'main-login';
+        Yii::$app->view->params['paramName'] = 'Login';
 
-        if (!\Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -75,6 +82,32 @@ class SiteController extends Controller
         }
 
         return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @return string|\yii\web\Response
+     * @throws \yii\db\Exception
+     */
+    public function actionRegister()
+    {
+        $this->layout = 'main-login';
+        Yii::$app->view->params['paramName'] = 'Cadastro';
+
+        $model = new User();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->setPassword($model->password_user);
+            $model->type =  User::TYPE_COMMON;
+
+            if($model->save()) {
+                Yii::$app->user->login($model);
+                return $this->goHome();
+            }
+        }
+
+        return $this->render('register', [
             'model' => $model,
         ]);
     }

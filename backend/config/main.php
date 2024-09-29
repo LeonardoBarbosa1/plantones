@@ -9,6 +9,7 @@ $params = array_merge(
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
+    'language' => 'pt-BR',
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
@@ -29,6 +30,37 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'urlManager' => [
+            'rules' => require(__DIR__ . '/routes.php'),
+        ],
+    ],
+    'as beforeRequest' => [
+        'class' => 'yii\filters\AccessControl',
+        'rules' => [
+            [
+                'allow' => true,
+                'actions' => ['login', 'error'],
+            ],
+            [
+                'allow' => true,
+                'actions' => ['register', 'error'],
+            ],
+            [
+                'allow' => true,
+                'controllers' => ['gii/*'],
+            ],
+            [
+                'allow' => true,
+                'controllers' => ['debug/*'],
+            ],
+            [
+                'allow' => true,
+                'roles' => ['@'],
+            ],
+        ],
+        'denyCallback' => function ($rule, $action) {
+            Yii::$app->response->redirect(['/login']);
+        },
     ],
     'params' => $params,
 ];

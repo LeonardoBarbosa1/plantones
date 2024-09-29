@@ -16,9 +16,21 @@ class UserTableSeeder extends TableSeeder
     {
         loop(function($i) {
             $this->insert(User::tableName(), [
+                'email' => "user{$i}@gmail.com",
+                'username' => "user{$i}",
+                'name' => "User {$i}",
+                'type' => User::TYPE_COMMON,
                 'auth_key' => Yii::$app->security->generateRandomString(),
                 'password_hash' => Yii::$app->security->generatePasswordHash('user'),
-                'email' => "user{$i}@gmail.com",
+            ]);
+
+            $this->insert(User::tableName(), [
+                'email' => "admin{$i}@gmail.com",
+                'username' => "admin{$i}",
+                'name' => "Admin {$i}",
+                'type' => User::TYPE_ADMIN,
+                'auth_key' => Yii::$app->security->generateRandomString(),
+                'password_hash' => Yii::$app->security->generatePasswordHash('user'),
             ]);
         }, DatabaseSeeder::USER_COUNT);
     }

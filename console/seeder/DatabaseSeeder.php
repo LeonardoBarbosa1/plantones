@@ -7,7 +7,7 @@ use console\seeder\tables\UserTableSeeder;
 class DatabaseSeeder extends TableSeeder
 {
 
-    const USER_COUNT = 10;
+    const USER_COUNT = 5;
 
     function run()
     {
