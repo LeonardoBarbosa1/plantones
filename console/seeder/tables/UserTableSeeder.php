@@ -30,7 +30,7 @@ class UserTableSeeder extends TableSeeder
                 'name' => "Admin {$i}",
                 'type' => User::TYPE_ADMIN,
                 'auth_key' => Yii::$app->security->generateRandomString(),
-                'password_hash' => Yii::$app->security->generatePasswordHash('user'),
+                'password_hash' => Yii::$app->security->generatePasswordHash('admin'),
             ]);
         }, DatabaseSeeder::USER_COUNT);
     }

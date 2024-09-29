@@ -10,7 +10,7 @@ $this->registerCssFile('https://code.ionicframework.com/ionicons/2.0.1/css/ionic
 
 $this->registerCss("
     body{
-        background-image: url('https://images.unsplash.com/photo-1653664495867-365bb2ca5510?q=80&w=2101&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Substitua pela URL da sua imagem */
+        background-image: url('/img/fundo-login-register.avif'); /* Substitua pela URL da sua imagem */
         background-size: cover; /* Faz a imagem cobrir toda a área */
         background-position: center; /* Centraliza a imagem */
         background-repeat: no-repeat; /* Não repete a imagem */
@@ -32,8 +32,8 @@ $this->registerCss("
 <body class="hold-transition login-page">
 <?php  $this->beginBody() ?>
 <div class="login-box">
-    <div class="login-logo" style>
-        <img src="/backend/web/img/Plantones.png" alt="Logo Plantones" style="max-width: 100%; height: auto;">
+    <div class="login-logo" style="text-align: center;">
+        <img src="/img/Plantones.png" alt="Logo Plantones" style="width: 180px; border-radius: 90px; max-width: 100%; height: auto;">
     </div>
     <!-- /.login-logo -->
 

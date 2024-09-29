@@ -15,7 +15,6 @@ $filename = basename(Yii::$app->controller->view->viewFile, '.php');
 
 ?>
 <div class="<?= $modulePath ?>-<?= $controller ?>-<?= $filename ?>">
-
 <!--    <div class="card-body login-card-body">-->
         <h3 class="login-box-msg" style="color: white;">Cadastro</h3>
 
@@ -79,8 +78,10 @@ $filename = basename(Yii::$app->controller->view->viewFile, '.php');
 
         <div class="row">
             <div class="col-8">
-                <p class="mb-0">
-                    <?= Html::a('Login', '/') ?>
+                <p class="mb-0" >
+                    <?= Html::a('Login', '/', [
+                            'class' => 'btn btn-primary',
+                    ]) ?>
                 </p>
             </div>
             <div class="col-4">
@@ -90,7 +91,6 @@ $filename = basename(Yii::$app->controller->view->viewFile, '.php');
 
         <?php ActiveForm::end(); ?>
 
-<!--    </div>-->
 </div>
 
 <script>

@@ -2,15 +2,18 @@
 
 use common\models\User;
 use hail812\adminlte\widgets\Menu;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 $usersCount = User::find()->count();
+
+$user = Yii::$app->user->identity;
 
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= Url::home() ?>" class="brand-link">
-        <img src="<?=$assetDir?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="/img/Plantones.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
         <span class="brand-text font-weight-light"><?= Yii::$app->name ?></span>
     </a>
 
@@ -18,11 +21,11 @@ $usersCount = User::find()->count();
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="<?=$assetDir?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
+<!--            <div class="image">-->
+<!--                <img src="--><?php //=$assetDir?><!--/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
+<!--            </div>-->
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a><span class="fas fa-user"></span>  <?= $user->name ?></a>
             </div>
         </div>
 
@@ -37,7 +40,7 @@ $usersCount = User::find()->count();
                     </button>
                 </div>
             </div>
-        </div> -->
+        </div>-->
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -49,12 +52,14 @@ $usersCount = User::find()->count();
                         'icon' => 'tachometer-alt',
                         'url' => ['site/index'],
                         'badge' => '<span class="right badge badge-info">2</span>',
+//                        'visible' => $user->isAdmin
                     ],
                     [
                         'label' => 'User',
                         'icon' => 'users',
                         'url' => ['user/index'],
                         'badge' => '<span class="right badge badge-info">' . $usersCount . '</span>',
+                        'visible' => $user->isAdmin
                     ],
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],

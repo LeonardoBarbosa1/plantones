@@ -8,11 +8,16 @@ use yii\helpers\Html;
  */
 
 $this->title = 'Login';
+$modulePath = Yii::$app->controller->module->id;
+
+$controller = Yii::$app->controller->id;
+
+$filename = basename(Yii::$app->controller->view->viewFile, '.php');
 
 ?>
-<div class="card">
-    <div class="card-body login-card-body">
-        <h3 class="login-box-msg">Login</h3>
+<div class="<?= $modulePath ?>-<?= $controller ?>-<?= $filename ?>">
+<!--    <div class="card-body login-card-body">-->
+        <h3 class="login-box-msg" style="color: white">Login</h3>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form']) ?>
 
@@ -22,9 +27,9 @@ $this->title = 'Login';
             'template' => '{beginWrapper}{input}{error}{endWrapper}',
             'wrapperOptions' => ['class' => 'input-group mb-3']
         ])->textInput([
-                'placeholder' => $model->getAttributeLabel('email'),
-                'type' => 'email',
-                'autocomplete' => 'email',
+            'placeholder' => $model->getAttributeLabel('email'),
+            'type' => 'email',
+            'autocomplete' => 'email',
         ]) ?>
 
         <?= $form->field($model, 'password', [
@@ -41,7 +46,7 @@ $this->title = 'Login';
             ->passwordInput(['placeholder' => $model->getAttributeLabel('password'), 'id' => 'password-input']) ?>
 
         <div class="row">
-            <div class="col-8">
+            <div class="col-8" style="color: white">
                 <?= $form->field($model, 'rememberMe')->checkbox([
                     'template' => '<div class="icheck-primary">{input}{label}</div>',
                     'labelOptions' => [
@@ -59,27 +64,11 @@ $this->title = 'Login';
         <?php ActiveForm::end(); ?>
 
         <p class="mb-0">
-            <?= Html::a('Cadastra-se', 'register') ?>
+            <?= Html::a('Cadastra-se', 'register', [
+                'class' => 'btn btn-success'
+            ]) ?>
         </p>
-<!--        <div class="social-auth-links text-center mb-3">-->
-<!--            <p>- OR -</p>-->
-<!--            <a href="#" class="btn btn-block btn-primary">-->
-<!--                <i class="fab fa-facebook mr-2"></i> Sign in using Facebook-->
-<!--            </a>-->
-<!--            <a href="#" class="btn btn-block btn-danger">-->
-<!--                <i class="fab fa-google-plus mr-2"></i> Sign in using Google+-->
-<!--            </a>-->
-<!--        </div>-->
-        <!-- /.social-auth-links -->
-
-<!--        <p class="mb-1">-->
-<!--            <a href="forgot-password.html">I forgot my password</a>-->
-<!--        </p>-->
-<!--        <p class="mb-0">-->
-<!--            <a href="register.html" class="text-center">Register a new membership</a>-->
-<!--        </p>-->
-    </div>
-    <!-- /.login-card-body -->
+<!--    </div>-->
 </div>
 
 
