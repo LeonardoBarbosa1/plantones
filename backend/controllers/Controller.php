@@ -3,8 +3,9 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\web\Controller as ControllerBase;
 
-class Controller extends \yii\web\Controller
+class Controller extends ControllerBase
 {
 
     /**

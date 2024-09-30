@@ -2,7 +2,6 @@
 
 use common\models\User;
 use hail812\adminlte\widgets\Menu;
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 $usersCount = User::find()->count();

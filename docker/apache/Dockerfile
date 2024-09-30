@@ -1,4 +1,4 @@
-FROM yiisoftware/yii2-php:7.4-apache
+FROM yiisoftware/yii2-php:8.1-apache
 
 USER root
 
@@ -28,7 +28,8 @@ COPY composer.json /var/www/html/
 COPY ./functions.php /var/www/html/
 
 #RUN composer install --no-dev --optimize-autoloader
-RUN composer install
+#RUN composer install
+RUN composer install --ignore-platform-req=php
 
 COPY . /var/www/html
 
