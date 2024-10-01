@@ -80,12 +80,12 @@ $filename = basename(Yii::$app->controller->view->viewFile, '.php');
             <div class="col-8">
                 <p class="mb-0" >
                     <?= Html::a('Login', '/', [
-                            'class' => 'btn btn-primary',
+                            'class' => 'btn btn-outline-primary',
                     ]) ?>
                 </p>
             </div>
             <div class="col-4">
-                <?= Html::submitButton('Cadastrar', ['class' => 'btn btn-success btn-block']) ?>
+                <?= Html::submitButton('Cadastrar', ['class' => 'btn btn-block btn-outline-light']) ?>
             </div>
         </div>
 

@@ -1,11 +1,13 @@
 <?php
 
 use common\models\User;
+use kartik\detail\DetailView;
+use kartik\grid\GridView;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $model->name;
 //$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
@@ -18,30 +20,40 @@ $this->title = $model->name;
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
-                    <p>
-                        <?= Html::a('Atualizar', ['update-profile', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                    </p>
+<!--                    <p>-->
+<!--                        --><?php //= Html::a('Atualizar', ['update-profile', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+<!--                    </p>-->
+
                     <?= DetailView::widget([
                         'model' => $model,
+                        'mode' => DetailView::MODE_VIEW,
+                        'panel' => [
+                            'heading' => 'Perfil',
+                            'type' => DetailView::TYPE_DARK,
+                        ],
+                        'buttons1' => '{update}',
+                        'viewAttributeContainer' => [
+                            'email' => false,
+                        ],
                         'attributes' => [
                             'email:email',
                             'username',
-                            'name',
+                             'name',
                             [
                                 'attribute' => 'type',
-                                'value' => function (User $model) {
-                                    return User::typeValues($model->type);
-                                }
+                                'displayOnly' => true,
+                                'value' => User::typeValues($model->type),
+
                             ],
-                            'created_at:date',
+                            [
+                                'attribute' => 'created_at',
+                                'displayOnly' => true,
+                                'format' => 'date',
+                            ],
                         ],
                     ]) ?>
                 </div>
-                <!--.col-md-12-->
             </div>
-            <!--.row-->
         </div>
-        <!--.card-body-->
     </div>
-    <!--.card-->
 </div>

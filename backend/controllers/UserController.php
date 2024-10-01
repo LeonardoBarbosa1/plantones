@@ -37,7 +37,7 @@ class UserController extends Controller
                     ],
                     [
                         'actions' => [
-                            'update-profile',
+//                            'update-profile',
                             'profile',
                         ],
                         'allow' => true,
@@ -157,7 +157,22 @@ class UserController extends Controller
 
     public function actionProfile($id)
     {
+        /**
+         * @var $user User
+         */
+        $user = Yii::$app->user->identity;
+
         $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user->type == User::TYPE_COMMON){
+                $model->type = User::TYPE_COMMON;
+            }
+
+            if($model->save()){
+                return $this->redirect(['profile', 'id' => $model->id]);
+            }
+        }
 
         return $this->render('profile', [
             'model' => $model,

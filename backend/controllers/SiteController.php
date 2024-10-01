@@ -97,6 +97,7 @@ class SiteController extends Controller
 
         $model = new User();
 
+        $model->setScenario(User::SCENARIO_CREATE);
         if ($model->load(Yii::$app->request->post())) {
             $model->setPassword($model->password_user);
             $model->type =  User::TYPE_COMMON;

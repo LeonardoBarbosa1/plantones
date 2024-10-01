@@ -46,7 +46,8 @@
         "antonyz89/yii2-many-to-many": "^0.3",
         "antonyz89/yii2-password-behavior": "dev-master",
         "antonyz89/yii2-pagesize": "@dev",
-        "antonyz89/yii2-toggle-column": "dev-main"
+        "antonyz89/yii2-toggle-column": "dev-main",
+        "kartik-v/yii2-detail-view": "^1.8"
     },
     "require-dev": {
         "codeception/codeception": "^4.1.6",

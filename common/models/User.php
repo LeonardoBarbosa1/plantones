@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use common\validators\UsernameValidator;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -27,6 +28,9 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public const SCENARIO_CREATE = 'create';
+    public const SCENARIO_UPDATE = 'update';
+
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
 
@@ -74,6 +78,8 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'email'],
             //username
             ['username', 'string'],
+            ['username', 'unique'],
+            ['username', UsernameValidator::class],
             //name
             ['name', 'required'],
             ['name', 'string'],
@@ -81,15 +87,15 @@ class User extends ActiveRecord implements IdentityInterface
             ['type', 'required'],
 //            ['type', 'in', 'range' => array_keys($this->typeValues())],
             //password
-            ['password_hash', 'required'],
+            ['password_hash', 'required', 'on' => self::SCENARIO_CREATE],
             ['password_hash', 'string'],
             //password_reset_token
             ['password_reset_token', 'string'],
             //password_user
-            ['password_user', 'required'],
+            ['password_user', 'required', 'on' => self::SCENARIO_CREATE],
             ['password_user', 'string', 'min' => 6],
             //confirm_password
-            ['confirm_password', 'required'],
+            ['confirm_password', 'required', 'on' => self::SCENARIO_CREATE],
             ['confirm_password', 'compare', 'compareAttribute' => 'password_user', 'message' => 'As senhas não correspondem.'],
             //auth_key
             ['auth_key', 'string'],
