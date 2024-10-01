@@ -50,8 +50,7 @@ $user = Yii::$app->user->identity;
                     [
                         'label' => $user->name,
                         'icon' => 'fas fa-user',
-                    'url' => ['user/profile', 'id' => $user->id],
-                        'target' => '_blank'
+                        'url' => ['user/profile', 'id' => $user->id],
                     ],
                     ['label' => 'Atividades', 'header' => true],
                     [

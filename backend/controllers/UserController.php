@@ -37,7 +37,7 @@ class UserController extends Controller
                     ],
                     [
                         'actions' => [
-                            'update',
+                            'update-profile',
                             'profile',
                         ],
                         'allow' => true,
@@ -117,6 +117,26 @@ class UserController extends Controller
         }
 
         return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing User model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param int $id ID
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateProfile($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('update-profile', [
             'model' => $model,
         ]);
     }

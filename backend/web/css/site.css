@@ -89,3 +89,18 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+
+@media (max-width: 768px) { /* Aplica estilos para telas com largura menor que 768px */
+    .detail-view td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .detail-view th {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+}
+

@@ -19,7 +19,7 @@ $this->title = $model->name;
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('Atualizar', ['update-profile', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                     </p>
                     <?= DetailView::widget([
                         'model' => $model,
