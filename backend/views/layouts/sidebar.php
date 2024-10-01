@@ -19,14 +19,14 @@ $user = Yii::$app->user->identity;
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+<!--        <div class="user-panel mt-3 pb-3 mb-3 d-flex">-->
 <!--            <div class="image">-->
 <!--                <img src="--><?php //=$assetDir?><!--/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
 <!--            </div>-->
-            <div class="info">
-                <a><span class="fas fa-user"></span>  <?= $user->name ?></a>
-            </div>
-        </div>
+<!--            <div class="info">-->
+<!--                <a><span class="fas fa-user"></span>  --><?php //= $user->name ?><!--</a>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <!-- SidebarSearch Form -->
         <!-- href be escaped -->
@@ -46,6 +46,14 @@ $user = Yii::$app->user->identity;
             <?php
             echo Menu::widget([
                 'items' => [
+                    ['label' => 'Perfil', 'header' => true],
+                    [
+                        'label' => $user->name,
+                        'icon' => 'fas fa-user',
+                    'url' => ['user/profile', 'id' => $user->id],
+                        'target' => '_blank'
+                    ],
+                    ['label' => 'Atividades', 'header' => true],
                     [
                         'label' => 'Dashboard',
                         'icon' => 'tachometer-alt',
@@ -54,7 +62,7 @@ $user = Yii::$app->user->identity;
 //                        'visible' => $user->isAdmin
                     ],
                     [
-                        'label' => 'User',
+                        'label' => 'Usuários',
                         'icon' => 'users',
                         'url' => ['user/index'],
                         'badge' => '<span class="right badge badge-info">' . $usersCount . '</span>',

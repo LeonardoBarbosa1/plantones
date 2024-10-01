@@ -33,4 +33,11 @@ class UserQuery extends ActiveQuery
     {
         return parent::one($db);
     }
+
+    public function whereId(int $id)
+    {
+        return $this->andWhere([
+            'id' => $id,
+        ]);
+    }
 }

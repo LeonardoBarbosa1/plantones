@@ -102,14 +102,18 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return string
      */
-    public function typeValues()
+    public static function typeValues($value = null)
     {
-        $types = [
+        $values = [
             self::TYPE_ADMIN => 'Administrador',
             self::TYPE_COMMON => 'Comum',
         ];
 
-        return $types[$this->type];
+        if ($value !== null) {
+            return $values[$value];
+        }
+
+        return $values;
     }
 
     /**
