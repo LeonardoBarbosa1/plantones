@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card" style="border-radius: 20px">
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-md-12">

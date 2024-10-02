@@ -6,6 +6,20 @@ use yii\bootstrap4\Breadcrumbs;
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
+        <?php if (Yii::$app->session->hasFlash('success')): ?>
+            <div class="alert alert-success alert-dismissable">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button" style="color: black">×</button>
+                <?= is_array(Yii::$app->session->getFlash('success')) ? implode(', ', Yii::$app->session->getFlash('success')) : Yii::$app->session->getFlash('success') ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (Yii::$app->session->hasFlash('error')): ?>
+            <div class="alert alert-danger alert-dismissable">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button" style="color: black">×</button>
+                <h4><i class="icon fa fa-times"></i>Error!</h4>
+                <?= is_array(Yii::$app->session->getFlash('error')) ? implode(', ', Yii::$app->session->getFlash('error')) : Yii::$app->session->getFlash('error') ?>
+            </div>
+        <?php endif; ?>
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">

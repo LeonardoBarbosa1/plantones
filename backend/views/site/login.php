@@ -57,7 +57,7 @@ $filename = basename(Yii::$app->controller->view->viewFile, '.php');
                 ]) ?>
             </div>
             <div class="col-4">
-                <?= Html::submitButton('Entrar', ['class' => 'btn btn-block btn-outline-primary']) ?>
+                <?= Html::submitButton('Entrar', ['class' => 'btn btn-block btn-primary']) ?>
             </div>
         </div>
 
@@ -65,7 +65,7 @@ $filename = basename(Yii::$app->controller->view->viewFile, '.php');
 
         <p class="mb-0">
             <?= Html::a('Cadastra-se', 'register', [
-                'class' => 'btn btn-block btn-outline-light'
+                'class' => 'btn btn-block btn-secondary'
             ]) ?>
         </p>
 <!--    </div>-->

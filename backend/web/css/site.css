@@ -104,3 +104,6 @@ a.desc:after {
     }
 }
 
+.card-header {
+   border-radius: 20px;
+}
