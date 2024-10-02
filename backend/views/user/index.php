@@ -39,7 +39,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return User::typeValues($model->type);
                                 }
                             ],
-
+                            [
+                                'attribute' => 'created_at',
+                                'format' => 'date',
+                            ],
                             [
                                 'class' => ActionColumn::class,
 

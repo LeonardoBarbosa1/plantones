@@ -54,11 +54,9 @@ $user = Yii::$app->user->identity;
                     ],
                     ['label' => 'Atividades', 'header' => true],
                     [
-                        'label' => 'Dashboard',
+                        'label' => 'Plantões',
                         'icon' => 'tachometer-alt',
-                        'url' => ['site/index'],
-                        'badge' => '<span class="right badge badge-info">2</span>',
-//                        'visible' => $user->isAdmin
+                        'url' => ['duty/index'],
                     ],
                     [
                         'label' => 'Usuários',

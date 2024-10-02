@@ -24,9 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]) ?>
                         <?= Html::a('Excluir', ['user/delete', 'id' => $model->id], [
                             'class' => 'btn btn-danger',
-                            'title' => Yii::t('yii', 'Confirmação'),
-                            'data-confirm' => Yii::t('app', 'Você tem certeza de que deseja excluir esse usuário?'),
                             'data-method' => 'post',
+                            'data-confirm' => 'Tem certeza que deseja excluir esse usuário?'
                         ]) ?>
                     </p>
                     <?= DetailView::widget([
