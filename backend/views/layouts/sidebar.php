@@ -55,7 +55,7 @@ $user = Yii::$app->user->identity;
                     ['label' => 'Atividades', 'header' => true],
                     [
                         'label' => 'Plantões',
-                        'icon' => 'tachometer-alt',
+                        'icon' => 'fa-regular fa-calendar',
                         'url' => ['duty/index'],
                     ],
                     [

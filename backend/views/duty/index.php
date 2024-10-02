@@ -77,7 +77,7 @@ $user = Yii::$app->user->identity;
             <?php else : ?>
                 <div class="container-fluid">
                     <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">Olá!</h4>
+                        <h4 class="alert-heading">Olá, <?=$user->name?>!</h4>
                         <p>Por favor, insira a próxima data do seu plantão no campo abaixo.</p>
                         <hr>
                         <p class="mb-0">Este sistema foi desenvolvido inicialmente para pessoas que trabalham em turnos de 12x36 horas.</p>

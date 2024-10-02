@@ -1,6 +1,6 @@
 <footer class="main-footer">
-    <strong>Leonardo Barbosa &copy; <?= date('Y') ?> <a href="javascript:;"><?= Yii::$app->name ?></a>.</strong>
+    <strong>Leonardo Barbosa &copy; <a href="https://www.instagram.com/dev.barbosa2/" target="_blank">@dev.barbosa2</a>.</strong>
     <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 0.0.1
+        <b>Plantones</b>
     </div>
 </footer>
