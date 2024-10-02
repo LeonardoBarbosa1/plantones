@@ -1,5 +1,6 @@
 <?php
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -7,7 +8,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\User */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Usuários', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -18,29 +19,30 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                        <?= Html::a('Atualizar', ['user/update', 'id' => $model->id], [
+                            'class' => 'btn btn-primary',
+                        ]) ?>
+                        <?= Html::a('Excluir', ['user/delete', 'id' => $model->id], [
                             'class' => 'btn btn-danger',
-                            'data' => [
-                                'confirm' => 'Are you sure you want to delete this item?',
-                                'method' => 'post',
-                            ],
+                            'title' => Yii::t('yii', 'Confirmação'),
+                            'data-confirm' => Yii::t('app', 'Você tem certeza de que deseja excluir esse usuário?'),
+                            'data-method' => 'post',
                         ]) ?>
                     </p>
                     <?= DetailView::widget([
                         'model' => $model,
                         'attributes' => [
-                            'id',
                             'email:email',
                             'username',
                             'name',
-                            'type',
-                            'auth_key',
-                            'password_hash',
-                            'password_reset_token',
-                            'status',
-                            'created_at',
-                            'updated_at',
+                            [
+                                'attribute' => 'type',
+                                'value' => User::typeValues($model->type),
+                            ],
+                            [
+                                'attribute' => 'created_at',
+                                'format' => 'date',
+                            ],
                         ],
                     ]) ?>
                 </div>

@@ -79,8 +79,10 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -119,31 +121,26 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            if (!empty($model->password_user)) {
+                if ($model->password_user == $model->confirm_password){
+                    $model->setPassword($model->password_user);
+                }else {
+                    Yii::$app->getSession()->addFlash('error', Yii::t('app', 'As senhas não coincidem.'));
+                }
+            } else {
+                $model->password_hash = $model->getOldAttribute('password_hash');
+            }
+
+            if ($model->save()){
+                Yii::$app->getSession()->addFlash('success', Yii::t('app', 'Atualizado com sucesso'));
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing User model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdateProfile($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update-profile', [
             'model' => $model,
         ]);
     }
