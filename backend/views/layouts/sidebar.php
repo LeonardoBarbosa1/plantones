@@ -19,14 +19,15 @@ $user = Yii::$app->user->identity;
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-<!--        <div class="user-panel mt-3 pb-3 mb-3 d-flex">-->
-<!--            <div class="image">-->
-<!--                <img src="--><?php //=$assetDir?><!--/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
-<!--            </div>-->
-<!--            <div class="info">-->
-<!--                <a><span class="fas fa-user"></span>  --><?php //= $user->name ?><!--</a>-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--        <div class="user-panel mt-3 pb-3 mb-3 d-flex">-->
+        <!--            <div class="image">-->
+        <!--                <img src="-->
+        <?php //=$assetDir?><!--/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
+        <!--            </div>-->
+        <!--            <div class="info">-->
+        <!--                <a><span class="fas fa-user"></span>  --><?php //= $user->name ?><!--</a>-->
+        <!--            </div>-->
+        <!--        </div>-->
 
         <!-- SidebarSearch Form -->
         <!-- href be escaped -->
@@ -65,10 +66,23 @@ $user = Yii::$app->user->identity;
                         'badge' => '<span class="right badge badge-info">' . $usersCount . '</span>',
                         'visible' => $user->isAdmin
                     ],
-                    ['label' => 'Yii2 PROVIDED', 'header' => true],
-                    ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
+                    [
+                        'label' => 'Yii2 PROVIDED',
+                        'header' => true,
+                        'visible' => YII_ENV_DEV,
+                    ],
+                    [
+                        'label' => 'Gii',
+                        'icon' => 'file-code',
+                        'visible' => YII_ENV_DEV,
+                        'url' => ['/gii'], 'target' => '_blank'],
+                    [
+                        'label' => 'Debug',
+                        'icon' => 'bug',
+                        'visible' => YII_ENV_DEV,
+                        'url' => ['/debug'],
+                        'target' => '_blank',
+                    ],
                 ],
             ]);
             ?>
