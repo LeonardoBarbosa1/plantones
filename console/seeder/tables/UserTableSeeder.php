@@ -16,7 +16,7 @@ class UserTableSeeder extends TableSeeder
     {
         loop(function($i) {
             $this->insert(User::tableName(), [
-                'email' => "user{$i}@gmail.com",
+                'email' => "user{$i}@plantones.com",
                 'username' => "user{$i}",
                 'name' => "User {$i}",
                 'type' => User::TYPE_COMMON,
@@ -25,7 +25,7 @@ class UserTableSeeder extends TableSeeder
             ]);
 
             $this->insert(User::tableName(), [
-                'email' => "admin{$i}@gmail.com",
+                'email' => "admin{$i}@plantones.com",
                 'username' => "admin{$i}",
                 'name' => "Admin {$i}",
                 'type' => User::TYPE_ADMIN,
