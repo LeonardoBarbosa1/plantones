@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use yii\bootstrap4\Modal;
 use yii\helpers\Html;
 
 \hail812\adminlte3\assets\FontAwesomeAsset::register($this);
@@ -30,6 +31,35 @@ $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\ha
 <?php $this->beginBody() ?>
 
 <div class="wrapper">
+
+    <?= Modal::widget([
+        'id' => 'modal',
+        'options' => [
+            'tabindex' => false,
+            'data-keyboard' => false,
+            'data-backdrop' => 'static',
+        ]
+    ]) ?>
+
+    <?= Modal::widget([
+        'id' => 'modal-large',
+        'size' => Modal::SIZE_LARGE,
+        'options' => [
+            'tabindex' => false,
+            'data-keyboard' => false,
+            'data-backdrop' => 'static',
+        ]
+    ]) ?>
+
+    <?= Modal::widget([
+        'id' => 'modal-small',
+        'size' => Modal::SIZE_SMALL,
+        'options' => [
+            'tabindex' => false,
+            'data-keyboard' => false,
+            'data-backdrop' => 'static',
+        ]
+    ]) ?>
     <!-- Navbar -->
     <?= $this->render('navbar', ['assetDir' => $assetDir]) ?>
     <!-- /.navbar -->

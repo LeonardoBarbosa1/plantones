@@ -2,9 +2,38 @@
 /* @var $content string */
 
 use yii\bootstrap4\Breadcrumbs;
+use yii\bootstrap4\Modal;
+
 ?>
 <div class="content-wrapper">
+    <?= Modal::widget([
+        'id' => 'modal',
+        'options' => [
+            'tabindex' => false,
+            'data-keyboard' => false,
+            'data-backdrop' => 'static',
+        ]
+    ]) ?>
 
+    <?= Modal::widget([
+        'id' => 'modal-large',
+        'size' => Modal::SIZE_LARGE,
+        'options' => [
+            'tabindex' => false,
+            'data-keyboard' => false,
+            'data-backdrop' => 'static',
+        ]
+    ]) ?>
+
+    <?= Modal::widget([
+        'id' => 'modal-small',
+        'size' => Modal::SIZE_SMALL,
+        'options' => [
+            'tabindex' => false,
+            'data-keyboard' => false,
+            'data-backdrop' => 'static',
+        ]
+    ]) ?>
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <?php if (Yii::$app->session->hasFlash('success')): ?>

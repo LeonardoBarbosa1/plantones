@@ -4,22 +4,19 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Duty;
+use common\models\DutyActivities;
 
 /**
- * DutySearch represents the model behind the search form of `common\models\Duty`.
+ * DutyActivitiesSearch represents the model behind the search form of `common\models\DutyActivities`.
  */
-class DutySearch extends Duty
+class DutyActivitiesSearch extends DutyActivities
 {
-    public $duty_to_swap;
-    public $duty_to_receive;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['date', 'status', 'duty_to_swap', 'duty_to_receive'], 'safe'],
         ];
     }
 
@@ -47,10 +44,6 @@ class DutySearch extends Duty
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => false,
-//            'pagination' => [
-//                'pageSize' => 30,
-//            ],
         ]);
 
         $this->load($params);
@@ -61,28 +54,17 @@ class DutySearch extends Duty
             return $dataProvider;
         }
 
-        if ($this->date){
-            $date = strtotime($this->date);
-
-            $query->whereDate($date);
-        }
-
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            'duty_id' => $this->duty_id,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        return $dataProvider;
-    }
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
-    public function attributeLabels(){
-        return [
-            'duty_to_swap' => 'Data do plantão atual',
-            'duty_to_receive' => 'Data do plantão para troca',
-        ];
+        return $dataProvider;
     }
 }

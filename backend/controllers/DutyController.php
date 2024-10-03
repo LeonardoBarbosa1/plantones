@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\DutyActivitiesSearch;
 use common\models\User;
 use DateTime;
 use Yii;
@@ -34,6 +35,7 @@ class DutyController extends Controller
                             'delete',
                             'view',
                             'swap',
+                            'activate',
                         ],
                         'allow' => true,
                         'roles' => ['@'],
@@ -254,6 +256,21 @@ class DutyController extends Controller
         ]);
     }
 
+    public function actionActivate($id)
+    {
+        $model = $this->findModel($id);
+
+        $searchModel = new DutyActivitiesSearch();
+        $searchModel->duty_id = $model->id;
+
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('activate', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+
     /**
      * Finds the Duty model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -263,7 +280,7 @@ class DutyController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Duty::findOne($id)) !== null) {
+        if (($model = Duty::find()->whereId($id)->one()) !== null) {
             return $model;
         }
 

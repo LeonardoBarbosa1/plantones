@@ -10,8 +10,7 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $model->name;
-//$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-//$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = Yii::t('app', 'Perfil');
 \yii\web\YiiAsset::register($this);
 ?>
 

@@ -12,7 +12,6 @@ use yii\helpers\Html;
  */
 
 $this->title = 'Troca de plantão';
-$this->params['breadcrumbs'][] = ['label' => 'Plantões', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 /**

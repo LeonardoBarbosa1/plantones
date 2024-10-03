@@ -3,6 +3,8 @@
 use common\models\Duty;
 use common\models\User;
 use kartik\datecontrol\DateControl;
+use kartik\detail\DetailView;
+use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
 use kartik\widgets\ActiveForm;
 use yii\helpers\Html;
@@ -15,8 +17,6 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Plantões';
-$this->params['breadcrumbs'][] = $this->title;
-
 
 /**
  * @var $user User
@@ -29,11 +29,12 @@ $user = Yii::$app->user->identity;
         <div class="col-md-12">
 
             <?php if ($modelCount > 0) : ?>
-                <div class="card">
+                <div class="card" style="border-radius: 20px">
 
                     <div class="card-body">
                         <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                               aria-expanded="false">
                                 <span class="fa fa-cog"></span>
                             </a>
 
@@ -46,13 +47,13 @@ $user = Yii::$app->user->identity;
                             </div>
                         </div>
 
-                        <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+                        <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
                         <?= GridView::widget([
                             'dataProvider' => $dataProvider,
                             'rowOptions' => function (Duty $model) {
                                 return [
-                                    'class' => $model->status == Duty::STATUS_SLACK ? 'bg-success' : 'bg-default',
+                                    'class' => $model->status == Duty::STATUS_SLACK ? 'bg-info' : 'bg-default',
                                 ];
                             },
                             'columns' => [
@@ -70,19 +71,37 @@ $user = Yii::$app->user->identity;
                                     },
 
                                 ],
+//                                [
+//                                    'class' => ActionColumn::class,
+//                                    'template' => '{actives}',
+//                                    'buttons' => [
+//                                        'actives' => function ($url, Duty $model) {
+//
+//                                            return $model->status == Duty::STATUS_DUTY ? Html::a('<span class="fa fa-check-circle"></span>', ['duty/activate', 'id' => $model->id], [
+//                                                'class' => 'btn btn-sm btn-success',
+//                                            ]) : null;
+//                                        }
+//                                    ],
+//                                    'visibleButtons' => [
+//                                        'delete' => false,
+//                                        'view' => false,
+//                                        'update' => false,
+//                                    ]
+//                                ],
                             ],
                         ]); ?>
                     </div>
                 </div>
             <?php else : ?>
                 <div class="container-fluid">
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">Olá, <?=$user->name?>!</h4>
+                    <div class="alert alert-success" style="border-radius: 20px" role="alert">
+                        <h4 class="alert-heading">Olá, <?= $user->name ?>!</h4>
                         <p>Por favor, insira a próxima data do seu plantão no campo abaixo.</p>
                         <hr>
-                        <p class="mb-0">Este sistema foi desenvolvido inicialmente para pessoas que trabalham em turnos de 12x36 horas.</p>
+                        <p class="mb-0">Este sistema foi desenvolvido inicialmente para pessoas que trabalham em turnos
+                            de 12x36 horas.</p>
                     </div>
-                    <div class="card">
+                    <div class="card" style="border-radius: 20px">
                         <div class="card-body">
                             <?php $form = ActiveForm::begin(); ?>
                             <div class="row">
