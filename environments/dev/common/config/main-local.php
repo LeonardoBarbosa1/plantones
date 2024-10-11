@@ -1,9 +1,10 @@
 <?php
-return [
+$config = [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=mysql.plantones.localhost;dbname=plantones',
+//            'dsn' => 'mysql:host=127.0.0.1;dbname=plantones',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
@@ -18,3 +19,25 @@ return [
         ],
     ],
 ];
+
+
+$config['modules']['gii'] = [
+    'class' => 'yii\gii\Module',
+    'allowedIPs' => ['127.0.0.1', '::1'],
+    'generators' => [
+        'model' => [
+            'class' => 'antonyz89\templates\model\Generator',
+            'templates' => [
+                'default' => '@antonyz89/templates/model/default', // add default template
+            ]
+        ],
+        'crud' => [
+            'class' => 'antonyz89\templates\crud\Generator',
+            'templates' => [
+                'admin-lte' => '@antonyz89/templates/crud/admin-lte', // add default template
+            ]
+        ]
+    ],
+];
+
+return $config;
