@@ -79,7 +79,8 @@ class DutyController extends Controller
             }
 
             // Definir a data final como o último dia do ano
-            $endDate = strtotime(date('Y-12-31', $startDate)); // Último dia do ano
+            $endDate = strtotime('+1 year', $startDate); // Último dia do ano
+
 
             // Alternar entre STATUS_DUTY e STATUS_SLACK
             $currentStatus = Duty::STATUS_DUTY;
@@ -106,8 +107,8 @@ class DutyController extends Controller
                 $startDate = strtotime("+1 day", $startDate);
             }
 
-            $lastDayOfYear = (new DateTime('last day of December'))->format('d/m/Y');
-            Yii::$app->getSession()->addFlash('success', Yii::t('app', "Plantões até dia $lastDayOfYear cadastrados com sucesso."));
+            $endDateFormatted = date('d/m/Y', $endDate);
+            Yii::$app->getSession()->addFlash('success', Yii::t('app', "Plantões até dia $endDateFormatted cadastrados com sucesso."));
 
             return $this->redirect(['index', 'id' => $model->id]);
         }
